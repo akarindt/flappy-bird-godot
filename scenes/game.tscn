@@ -32,10 +32,16 @@ position = Vector2(570, -287)
 [node name="SpawnPipe" type="Node" parent="."]
 script = ExtResource("4_iywne")
 
+[node name="Timer" type="Timer" parent="SpawnPipe"]
+
 [node name="Bird" parent="." instance=ExtResource("1_uwrxv")]
-z_index = 5
+z_index = 10
 position = Vector2(362, -1)
+scale = Vector2(0.7, 0.7)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+z_index = 10
 position = Vector2(362, 2)
 zoom = Vector2(2.5, 2.5)
+
+[connection signal="timeout" from="SpawnPipe/Timer" to="SpawnPipe" method="_on_timer_timeout"]

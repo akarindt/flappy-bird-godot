@@ -87,3 +87,4 @@ autoplay = "default"
 
 [node name="BirdCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_jggmu")
+one_way_collision = true

@@ -1,6 +1,6 @@
 extends Node2D
 
-const SPEED = 100.0
+const SPEED = 75.0
 const TEXTURE_WIDTH = 530.0
 
 @onready var camera_2d: Camera2D = $Camera2D
