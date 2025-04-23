@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://dt8ioyqm8bnd0"]
+
+[ext_resource type="Script" uid="uid://2tu0516o3ngo" path="res://scripts/game.gd" id="1_iywne"]
+[ext_resource type="PackedScene" uid="uid://rsmftc8qbjxf" path="res://scenes/bird.tscn" id="1_uwrxv"]
+[ext_resource type="PackedScene" uid="uid://bfupajv7drhia" path="res://scenes/base.tscn" id="2_iywne"]
+[ext_resource type="PackedScene" uid="uid://dir0rxwdjan63" path="res://scenes/background.tscn" id="2_lnu2h"]
+[ext_resource type="Script" uid="uid://dfjsk15kgl8y2" path="res://scripts/spawn_pipe.gd" id="4_iywne"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_iywne")
+metadata/_edit_horizontal_guides_ = [641.0]
+metadata/_edit_vertical_guides_ = [361.0]
+
+[node name="Base" type="Node" parent="."]
+
+[node name="Base" parent="Base" instance=ExtResource("2_iywne")]
+z_index = 5
+position = Vector2(97, 107)
+
+[node name="Base2" parent="Base" instance=ExtResource("2_iywne")]
+z_index = 5
+position = Vector2(504.72, 107)
+
+[node name="BG" type="Node" parent="."]
+
+[node name="BG1" parent="BG" instance=ExtResource("2_lnu2h")]
+position = Vector2(92, -287)
+
+[node name="BG2" parent="BG" instance=ExtResource("2_lnu2h")]
+position = Vector2(570, -287)
+
+[node name="SpawnPipe" type="Node" parent="."]
+script = ExtResource("4_iywne")
+
+[node name="Bird" parent="." instance=ExtResource("1_uwrxv")]
+z_index = 5
+position = Vector2(362, -1)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(362, 2)
+zoom = Vector2(2.5, 2.5)

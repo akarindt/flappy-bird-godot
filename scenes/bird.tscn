@@ -1,0 +1,89 @@
+[gd_scene load_steps=15 format=3 uid="uid://rsmftc8qbjxf"]
+
+[ext_resource type="Texture2D" uid="uid://d3cxb3vd4f8gt" path="res://assets/sprites/redbird-downflap.png" id="1_hq4t0"]
+[ext_resource type="Script" uid="uid://cks4camt8c5n6" path="res://scripts/bird.gd" id="1_qavic"]
+[ext_resource type="Texture2D" uid="uid://ckmbl1q8h63us" path="res://assets/sprites/redbird-midflap.png" id="2_twsrt"]
+[ext_resource type="Texture2D" uid="uid://dyw5qvhgquyur" path="res://assets/sprites/redbird-upflap.png" id="3_b7mtg"]
+[ext_resource type="Texture2D" uid="uid://cqsmimjmw4yn7" path="res://assets/sprites/bluebird-downflap.png" id="4_bdh3x"]
+[ext_resource type="Texture2D" uid="uid://3taict2wexio" path="res://assets/sprites/bluebird-midflap.png" id="5_jggmu"]
+[ext_resource type="Texture2D" uid="uid://ctk1fmqiio2dg" path="res://assets/sprites/bluebird-upflap.png" id="6_hrcfq"]
+[ext_resource type="Texture2D" uid="uid://jdk5ygu4gn80" path="res://assets/sprites/yellowbird-downflap.png" id="7_ehebh"]
+[ext_resource type="Texture2D" uid="uid://di8yrfryt5axf" path="res://assets/sprites/yellowbird-midflap.png" id="8_qavic"]
+[ext_resource type="Texture2D" uid="uid://b5jx67roromh3" path="res://assets/sprites/yellowbird-upflap.png" id="9_ifiym"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_twsrt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_ehebh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_qavic")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ifiym")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jggmu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_bdh3x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_jggmu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_hrcfq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qavic"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_hq4t0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_twsrt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_b7mtg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jggmu"]
+radius = 12.0416
+
+[node name="Bird" type="CharacterBody2D"]
+script = ExtResource("1_qavic")
+
+[node name="Default" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_twsrt")
+autoplay = "default"
+frame = 1
+frame_progress = 0.483932
+
+[node name="Blue" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_jggmu")
+autoplay = "default"
+frame_progress = 0.579299
+
+[node name="Red" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_qavic")
+autoplay = "default"
+
+[node name="BirdCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_jggmu")

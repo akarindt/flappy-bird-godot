@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://dir0rxwdjan63"]
+
+[ext_resource type="Script" uid="uid://d0csmb0xwi6j0" path="res://scripts/background.gd" id="1_cbsqf"]
+[ext_resource type="Texture2D" uid="uid://bv2i82exgw146" path="res://assets/sprites/background-day.png" id="1_y0upk"]
+[ext_resource type="Texture2D" uid="uid://c7g3h7jpchxra" path="res://assets/sprites/background-night.png" id="2_jougr"]
+
+[node name="Background" type="Node2D"]
+script = ExtResource("1_cbsqf")
+metadata/_edit_horizontal_guides_ = [0.0]
+metadata/_edit_vertical_guides_ = [0.0]
+
+[node name="SpriteDay" type="Sprite2D" parent="."]
+
+[node name="Day" type="Sprite2D" parent="SpriteDay"]
+position = Vector2(150, 250)
+texture = ExtResource("1_y0upk")
+
+[node name="Day2" type="Sprite2D" parent="SpriteDay"]
+position = Vector2(300, 250)
+texture = ExtResource("1_y0upk")
+
+[node name="Day3" type="Sprite2D" parent="SpriteDay"]
+position = Vector2(450, 250)
+texture = ExtResource("1_y0upk")
+
+[node name="SpriteNight" type="Sprite2D" parent="."]
+visible = false
+
+[node name="Night" type="Sprite2D" parent="SpriteNight"]
+position = Vector2(150, 250)
+texture = ExtResource("2_jougr")
+
+[node name="Night2" type="Sprite2D" parent="SpriteNight"]
+position = Vector2(300, 250)
+texture = ExtResource("2_jougr")
+
+[node name="Night3" type="Sprite2D" parent="SpriteNight"]
+position = Vector2(450, 250)
+texture = ExtResource("2_jougr")
