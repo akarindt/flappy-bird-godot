@@ -1,15 +1,85 @@
-[gd_scene load_steps=6 format=3 uid="uid://dt8ioyqm8bnd0"]
+[gd_scene load_steps=18 format=3 uid="uid://dt8ioyqm8bnd0"]
 
 [ext_resource type="Script" uid="uid://2tu0516o3ngo" path="res://scripts/game.gd" id="1_iywne"]
 [ext_resource type="PackedScene" uid="uid://rsmftc8qbjxf" path="res://scenes/bird.tscn" id="1_uwrxv"]
 [ext_resource type="PackedScene" uid="uid://bfupajv7drhia" path="res://scenes/base.tscn" id="2_iywne"]
 [ext_resource type="PackedScene" uid="uid://dir0rxwdjan63" path="res://scenes/background.tscn" id="2_lnu2h"]
+[ext_resource type="Script" uid="uid://3wrjb8a5snu8" path="res://scripts/game_manager.gd" id="2_u5sy4"]
+[ext_resource type="FontFile" uid="uid://3824fuo4wkje" path="res://assets/flappy-font.ttf" id="3_u5sy4"]
 [ext_resource type="Script" uid="uid://dfjsk15kgl8y2" path="res://scripts/spawn_pipe.gd" id="4_iywne"]
+[ext_resource type="Texture2D" uid="uid://4tmrpmmpl1ve" path="res://assets/sprites/message.png" id="8_gee14"]
+[ext_resource type="Texture2D" uid="uid://u4sv6dsjj8q6" path="res://assets/sprites/gameover.png" id="9_0tnpc"]
+[ext_resource type="Texture2D" uid="uid://cpgvloebvv3kx" path="res://assets/sprites/score.png" id="10_vtaks"]
+[ext_resource type="Texture2D" uid="uid://c6ab2hfhx7rat" path="res://assets/sprites/play.png" id="11_kvpfn"]
+[ext_resource type="Texture2D" uid="uid://r6axi3wal0hv" path="res://assets/sprites/exit.png" id="12_dinhu"]
+[ext_resource type="Script" uid="uid://bwkelqpmrw0s0" path="res://scripts/play_button.gd" id="12_kvuet"]
+[ext_resource type="Script" uid="uid://dvjnt2hgoxdit" path="res://scripts/exit_button.gd" id="14_trtic"]
+
+[sub_resource type="Animation" id="Animation_gee14"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlashRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_u5sy4"]
+resource_name = "new_animation"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlashRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(4, 1, 0.4),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0tnpc"]
+_data = {
+&"RESET": SubResource("Animation_gee14"),
+&"new_animation": SubResource("Animation_u5sy4")
+}
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_iywne")
-metadata/_edit_horizontal_guides_ = [641.0]
-metadata/_edit_vertical_guides_ = [361.0]
+metadata/_edit_horizontal_guides_ = [641.0, 52.0, 61.0]
+metadata/_edit_vertical_guides_ = [361.0, 291.0, 431.0, 335.0, 392.0]
+
+[node name="GameManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_u5sy4")
+
+[node name="ScoreLabel" type="Label" parent="GameManager"]
+z_index = 9
+anchors_preset = -1
+anchor_left = 0.86
+anchor_top = -0.085
+anchor_right = 0.86
+anchor_bottom = -0.085
+offset_left = -21.2
+offset_top = -35.2
+offset_right = 84.8
+offset_bottom = 20.8
+scale = Vector2(0.4, 0.4)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("3_u5sy4")
+theme_override_font_sizes/font_size = 56
+text = "0"
+horizontal_alignment = 1
 
 [node name="Base" type="Node" parent="."]
 
@@ -43,5 +113,92 @@ scale = Vector2(0.7, 0.7)
 z_index = 10
 position = Vector2(362, 2)
 zoom = Vector2(2.5, 2.5)
+
+[node name="FlashRect" type="ColorRect" parent="."]
+unique_name_in_owner = true
+z_index = 20
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 55.0
+offset_top = -317.0
+offset_right = 1203.0
+offset_bottom = 239.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_0tnpc")
+}
+
+[node name="MainMenu" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+z_index = 20
+position = Vector2(361, -34)
+scale = Vector2(0.758, 0.7)
+texture = ExtResource("8_gee14")
+
+[node name="Scoreboard" type="Node2D" parent="."]
+unique_name_in_owner = true
+z_index = 20
+position = Vector2(0, -53)
+
+[node name="GameOver" type="Sprite2D" parent="Scoreboard"]
+unique_name_in_owner = true
+z_index = 20
+position = Vector2(361, -15)
+scale = Vector2(0.725, 0.707143)
+texture = ExtResource("9_0tnpc")
+
+[node name="Score" type="Sprite2D" parent="Scoreboard"]
+unique_name_in_owner = true
+position = Vector2(360.883, 46.25)
+scale = Vector2(1.88873, 1.8617)
+texture = ExtResource("10_vtaks")
+
+[node name="ScoreLabelBottom" type="Label" parent="Scoreboard"]
+unique_name_in_owner = true
+offset_left = 310.0
+offset_top = 39.0
+offset_right = 361.0
+offset_bottom = 54.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_u5sy4")
+theme_override_font_sizes/font_size = 14
+text = "0"
+horizontal_alignment = 1
+
+[node name="BestScoreLabel" type="Label" parent="Scoreboard"]
+unique_name_in_owner = true
+offset_left = 371.0
+offset_top = 29.0
+offset_right = 414.0
+offset_bottom = 44.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_u5sy4")
+theme_override_font_sizes/font_size = 14
+text = "0"
+horizontal_alignment = 1
+
+[node name="PlayButton" type="TextureButton" parent="Scoreboard"]
+offset_left = 312.0
+offset_top = 96.0
+offset_right = 700.0
+offset_bottom = 253.0
+scale = Vector2(0.118, 0.118)
+texture_normal = ExtResource("11_kvpfn")
+script = ExtResource("12_kvuet")
+
+[node name="ExitButton" type="TextureButton" parent="Scoreboard"]
+offset_left = 374.0
+offset_top = 96.0
+offset_right = 762.0
+offset_bottom = 253.0
+scale = Vector2(0.118, 0.118)
+texture_normal = ExtResource("12_dinhu")
+script = ExtResource("14_trtic")
 
 [connection signal="timeout" from="SpawnPipe/Timer" to="SpawnPipe" method="_on_timer_timeout"]

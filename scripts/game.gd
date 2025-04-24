@@ -8,6 +8,8 @@ const TEXTURE_WIDTH = 530.0
 @onready var backgrounds = [$BG/BG1, $BG/BG2]
 @onready var bases = [$Base/Base, $Base/Base2]
 
+@onready var game_manager: Node = %GameManager
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass

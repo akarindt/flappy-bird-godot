@@ -1,34 +1,58 @@
-[gd_scene load_steps=5 format=3 uid="uid://b2foofuc5chke"]
+[gd_scene load_steps=7 format=3 uid="uid://b2foofuc5chke"]
 
 [ext_resource type="Script" uid="uid://dybhty31e23b4" path="res://scripts/pipes.gd" id="1_3ahhd"]
 [ext_resource type="Texture2D" uid="uid://dh2tsxe3l0i63" path="res://assets/sprites/pipe-green.png" id="1_f17p0"]
+[ext_resource type="AudioStream" uid="uid://bnw0cplbsxw1q" path="res://assets/audio/point.wav" id="3_prsvi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3ahhd"]
-size = Vector2(45, 318)
+size = Vector2(52, 319)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_prsvi"]
-size = Vector2(46, 319)
+size = Vector2(52, 321)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v53nb"]
+size = Vector2(1, 82)
 
 [node name="Pipes" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_3ahhd")
 
-[node name="Top" type="StaticBody2D" parent="."]
+[node name="TopPipe" type="StaticBody2D" parent="."]
+position = Vector2(0, -21)
+collision_layer = 2
+collision_mask = 4
 
-[node name="Sprite2D" type="Sprite2D" parent="Top"]
+[node name="Sprite2D" type="Sprite2D" parent="TopPipe"]
 position = Vector2(206, 278)
 texture = ExtResource("1_f17p0")
 flip_v = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Top"]
-position = Vector2(206.5, 278)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopPipe"]
+position = Vector2(206, 278.5)
 shape = SubResource("RectangleShape2D_3ahhd")
 
-[node name="Bottom" type="StaticBody2D" parent="."]
+[node name="BottomPipe" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 4
 
-[node name="Sprite2D" type="Sprite2D" parent="Bottom"]
+[node name="Sprite2D" type="Sprite2D" parent="BottomPipe"]
 position = Vector2(206, 662)
 texture = ExtResource("1_f17p0")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Bottom"]
-position = Vector2(206, 661)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomPipe"]
+position = Vector2(206, 662.5)
 shape = SubResource("RectangleShape2D_prsvi")
+
+[node name="PipeZone" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PipeZone"]
+position = Vector2(235, 459)
+shape = SubResource("RectangleShape2D_v53nb")
+
+[node name="PointSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_prsvi")
+bus = &"Point"
+
+[connection signal="body_entered" from="PipeZone" to="." method="_on_pipe_zone_body_entered"]
