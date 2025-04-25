@@ -20,6 +20,7 @@ config/icon="uid://2xfft8r4t0vo"
 window/size/viewport_width=420
 window/size/viewport_height=880
 window/stretch/mode="viewport"
+window/handheld/orientation=1
 window/vsync/vsync_mode=0
 
 [dotnet]
@@ -41,4 +42,5 @@ jump={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+textures/vram_compression/import_etc2_astc=true
 textures/stretch/aspect="keep"

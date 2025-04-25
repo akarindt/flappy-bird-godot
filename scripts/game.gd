@@ -17,12 +17,13 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	for bg in backgrounds:
-		bg.position.x -= SPEED * delta
-		if bg.position.x <= -TEXTURE_WIDTH:
-			bg.position.x += TEXTURE_WIDTH * 2
-			
-	for base in bases:
-		base.position.x -= SPEED * delta
-		if base.position.x <= -TEXTURE_WIDTH:
-			base.position.x += TEXTURE_WIDTH * 2
+	if !game_manager.check_dead():
+		for bg in backgrounds:
+			bg.position.x -= SPEED * delta
+			if bg.position.x <= -TEXTURE_WIDTH:
+				bg.position.x += TEXTURE_WIDTH * 2
+				
+		for base in bases:
+			base.position.x -= SPEED * delta
+			if base.position.x <= -TEXTURE_WIDTH:
+				base.position.x += TEXTURE_WIDTH * 2

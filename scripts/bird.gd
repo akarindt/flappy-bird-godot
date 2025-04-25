@@ -4,6 +4,7 @@ extends CharacterBody2D
 
 const GRAVITY = 1000
 const JUMP_FORCE = -250
+const ROTATION_DEG = -30
 
 var PIPE_NAME = ["BottomPipe", "TopPipe", "Base", "Base2"]
 
@@ -13,15 +14,18 @@ var PIPE_NAME = ["BottomPipe", "TopPipe", "Base", "Base2"]
 @onready var game_manager: Node = %GameManager
 
 func _physics_process(delta):
-	if game_manager.check_start():
+	visible = !game_manager.check_dead() && game_manager.check_start()
+	if !game_manager.check_dead() && game_manager.check_start():
 		velocity.y += GRAVITY * delta
 		if Input.is_action_just_pressed("jump"):
 			velocity.y = JUMP_FORCE
-			rotation_degrees = -30
+			rotation_degrees = ROTATION_DEG
 			wing_sound.play()
 		else:
-			rotation_degrees = clamp(velocity.y * 0.1, -30, 90)
+			rotation_degrees = clamp(velocity.y * 0.1, ROTATION_DEG, 90)
+		
 		move_and_slide()
+		
 		for i in get_slide_collision_count():
 			var collision = get_slide_collision(i)
 			if PIPE_NAME.has(collision.get_collider().name):
@@ -30,11 +34,9 @@ func _physics_process(delta):
 		move_and_slide()
 
 func die():
+	game_manager.set_dead(true)
 	velocity = Vector2.ZERO
 	animation_player.play("hit")
-
-func pause_game() -> void:
-	get_tree().paused = true
 
 func flash() -> void:
 	game_manager.play_flash()

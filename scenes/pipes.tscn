@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://b2foofuc5chke"]
+[gd_scene load_steps=8 format=3 uid="uid://b2foofuc5chke"]
 
 [ext_resource type="Script" uid="uid://dybhty31e23b4" path="res://scripts/pipes.gd" id="1_3ahhd"]
 [ext_resource type="Texture2D" uid="uid://dh2tsxe3l0i63" path="res://assets/sprites/pipe-green.png" id="1_f17p0"]
 [ext_resource type="AudioStream" uid="uid://bnw0cplbsxw1q" path="res://assets/audio/point.wav" id="3_prsvi"]
+[ext_resource type="Texture2D" uid="uid://d0745agt0m55n" path="res://assets/sprites/pipe-red.png" id="3_v53nb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3ahhd"]
 size = Vector2(52, 319)
@@ -23,9 +24,15 @@ position = Vector2(0, -21)
 collision_layer = 2
 collision_mask = 4
 
-[node name="Sprite2D" type="Sprite2D" parent="TopPipe"]
+[node name="GreenTop" type="Sprite2D" parent="TopPipe"]
 position = Vector2(206, 278)
 texture = ExtResource("1_f17p0")
+flip_v = true
+
+[node name="RedTop" type="Sprite2D" parent="TopPipe"]
+visible = false
+position = Vector2(206, 278)
+texture = ExtResource("3_v53nb")
 flip_v = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TopPipe"]
@@ -36,9 +43,14 @@ shape = SubResource("RectangleShape2D_3ahhd")
 collision_layer = 2
 collision_mask = 4
 
-[node name="Sprite2D" type="Sprite2D" parent="BottomPipe"]
+[node name="GreenBottom" type="Sprite2D" parent="BottomPipe"]
 position = Vector2(206, 662)
 texture = ExtResource("1_f17p0")
+
+[node name="RedBottom" type="Sprite2D" parent="BottomPipe"]
+visible = false
+position = Vector2(206, 662)
+texture = ExtResource("3_v53nb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BottomPipe"]
 position = Vector2(206, 662.5)
